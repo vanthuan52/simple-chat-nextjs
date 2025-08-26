@@ -15,14 +15,11 @@ type NotificationStore = {
   clear: () => void;
 };
 
-export const notificationStore = create<NotificationStore>((set) => ({
+export const useNotification = create<NotificationStore>((set) => ({
   notifications: [],
   addNotification: (n) =>
     set((state) => ({
-      notifications: [
-        { ...n, read: false, createdAt: Date.now() },
-        ...state.notifications,
-      ],
+      notifications: [n, ...state.notifications],
     })),
   markAsRead: (idx) =>
     set((state) => {

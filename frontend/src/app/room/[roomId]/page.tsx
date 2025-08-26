@@ -7,7 +7,6 @@ import MessageList from '@/components/message-list';
 import MessageInput from '@/components/message-input';
 import AuthGuard from '@/components/auth-guard';
 import { useAuth } from '@/store/auth-store';
-import { api } from '@/lib/api';
 
 export default function ChatRoomPage() {
   const { rooms, setActiveRoom, fetchMessages } = useChat();
@@ -36,7 +35,7 @@ export default function ChatRoomPage() {
     init();
   }, [roomId, accessToken]);
 
-  if (loading) return <div>Loading room...</div>;
+  if (loading) return <div className="text-center">Loading room...</div>;
 
   const room = rooms.find((r) => r.id === params.roomId);
 

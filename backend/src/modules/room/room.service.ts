@@ -54,7 +54,10 @@ export class RoomService {
   }
 
   getRoom(roomId: string) {
-    return this.prisma.room.findUnique({ where: { id: roomId } });
+    return this.prisma.room.findUnique({
+      where: { id: roomId },
+      include: { users: true },
+    });
   }
 
   listMyRooms(userId: string) {

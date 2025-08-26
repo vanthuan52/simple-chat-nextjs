@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
-import './globals.css';
+import { ToastContainer } from 'react-toastify';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import ErrorBoundary from '@/components/error-boundary';
+import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const lexend = Lexend({
   variable: '--font-lexend',
@@ -29,6 +31,7 @@ export default function RootLayout({
             <div className="w-full max-w-5xl mx-auto">{children}</div>
           </main>
           <Footer />
+          <ToastContainer position="top-right" autoClose={3000} />
         </body>
       </ErrorBoundary>
     </html>

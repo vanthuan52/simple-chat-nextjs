@@ -1,34 +1,21 @@
 'use client';
+
 import { useEffect, useRef } from 'react';
 import { useAuth } from '@/store/auth-store';
-import { useChat, type Message } from '@/store/chat-store';
-import { getSocket } from '@/lib/socket';
+import { useChat } from '@/store/chat-store';
+import { useRoomSocket } from '@/hooks/use-room-socket';
 
 export default function MessageList() {
   const { accessToken, user } = useAuth();
   const { activeRoomId, messages, fetchMessages, appendMessage } = useChat();
   const endRef = useRef<HTMLDivElement | null>(null);
 
+  useRoomSocket(activeRoomId);
+
   useEffect(() => {
     if (!accessToken || !activeRoomId) return;
-
     fetchMessages(accessToken, activeRoomId);
-    const socket = getSocket(accessToken);
-    socket.emit('joinRoom', { roomId: activeRoomId });
-
-    const onMessage = (msg: Message) => {
-      if (msg.roomId === activeRoomId) {
-        appendMessage(activeRoomId, msg);
-      }
-    };
-
-    socket.on('message', onMessage);
-
-    return () => {
-      socket.emit('leaveRoom', { roomId: activeRoomId });
-      socket.off('message', onMessage);
-    };
-  }, [accessToken, activeRoomId, fetchMessages, appendMessage]);
+  }, [accessToken, activeRoomId, fetchMessages]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
