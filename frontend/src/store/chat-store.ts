@@ -1,5 +1,5 @@
-import { api } from '@/lib/api';
 import { create } from 'zustand';
+import { api } from '@/lib/api';
 
 export type Room = {
   id: string;
@@ -26,6 +26,7 @@ interface ChatState {
 
 export const useChat = create<ChatState>((set, get) => ({
   rooms: [],
+  room: null,
   activeRoomId: null,
   messages: {},
   setActiveRoom(roomId) {

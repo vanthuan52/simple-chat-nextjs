@@ -76,7 +76,7 @@ Visit [http://localhost:3000](http://localhost:3000) to use the app.
 
 ---
 
-## Thư mục chính
+## Main Folders
 
 - `backend/`: Source NestJS, Prisma, seed, API
 - `frontend/`: Source Next.js, User Interface

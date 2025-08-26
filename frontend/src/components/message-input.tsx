@@ -21,7 +21,7 @@ export default function MessageInput() {
     <form onSubmit={onSend} className="flex items-center gap-2 w-full">
       <input
         className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        placeholder="Nhập tin nhắn..."
+        placeholder="Enter text..."
         value={content}
         onChange={(e) => setContent(e.target.value)}
         autoComplete="off"
@@ -31,7 +31,7 @@ export default function MessageInput() {
         type="submit"
         disabled={!content.trim()}
       >
-        Gửi
+        Send
       </button>
     </form>
   );

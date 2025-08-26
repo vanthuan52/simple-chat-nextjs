@@ -12,4 +12,10 @@ export class UserService {
   findAll() {
     return this.prisma.user.findMany({ select: { id: true, username: true } });
   }
+  findAllExcept(userId: string) {
+    return this.prisma.user.findMany({
+      where: { id: { not: userId } },
+      select: { id: true, username: true },
+    });
+  }
 }

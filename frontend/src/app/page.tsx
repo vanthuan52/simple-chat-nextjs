@@ -1,37 +1,16 @@
-'use client';
+import ImageAnimation from '@/components/image-animation';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/store/auth-store';
-
-export default function Page() {
-  const { accessToken } = useAuth();
-  const router = useRouter();
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (accessToken) router.replace('/chat');
-      else router.replace('/login');
-    }, 800);
-    return () => clearTimeout(timeout);
-  }, [accessToken, router]);
+export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-      <div className="animate-pulse w-12 h-12 rounded-full bg-blue-200 dark:bg-blue-900 flex items-center justify-center">
-        <svg
-          className="h-8 w-8 text-blue-500 dark:text-blue-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 4v4m0 0V4m0 4a8 8 0 11-8 8"
-          />
-        </svg>
-      </div>
-      <div className="text-slate-500 text-base">Đang chuyển hướng...</div>
-    </div>
+    <main className="relative min-h-screen flex flex-col items-center justify-center dark:from-slate-900 dark:to-slate-800 overflow-hidden">
+      <h1 className="z-20 text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg text-center mt-10 mb-2 tracking-tight select-none hidden">
+        Simple Chat App
+      </h1>
+      <p className="z-20 text-lg md:text-2xl text-white/80 text-center mb-8 max-w-2xl select-none">
+        Connection
+      </p>
+
+      <ImageAnimation />
+    </main>
   );
 }

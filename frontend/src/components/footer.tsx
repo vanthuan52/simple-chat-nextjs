@@ -1,13 +1,9 @@
-'use client';
-
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Footer = () => {
-  useEffect(() => {}, []);
-
   return (
     <footer className="text-center text-xs text-slate-400 py-6">
-      © 2025
+      © 2025<span>&nbsp;</span>
       <span className="font-semibold text-blue-600 dark:text-blue-400">
         Simple Chat App
       </span>

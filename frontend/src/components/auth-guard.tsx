@@ -35,7 +35,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
               d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
             ></path>
           </svg>
-          <div className="text-slate-500 text-sm">Đang xác thực...</div>
+          <div className="text-slate-500 text-sm">Authenticating...</div>
         </div>
       </div>
     );

@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { RoomService } from './room.service';
 
@@ -15,5 +23,10 @@ export class RoomController {
   @Post('with/:userId')
   async direct(@Req() req: any, @Param('userId') otherId: string) {
     return this.roomService.ensureDirectRoom(req.user.userId, otherId);
+  }
+
+  @Post('/get')
+  async get(@Req() req: any, @Body('userId') otherUserId: string) {
+    return this.roomService.getOrCreateRoom(req.user.userId, otherUserId);
   }
 }

@@ -3,6 +3,7 @@ import { Lexend } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import ErrorBoundary from '@/components/error-boundary';
 
 const lexend = Lexend({
   variable: '--font-lexend',
@@ -21,13 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lexend.variable} antialiased`}>
-        <Header />
-        <main className="min-h-[80vh] bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center px-2 md:px-0">
-          <div className="w-full max-w-5xl mx-auto">{children}</div>
-        </main>
-        <Footer />
-      </body>
+      <ErrorBoundary>
+        <body className={`${lexend.variable} antialiased`}>
+          <Header />
+          <main className="min-h-[80vh] bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center px-2 md:px-0">
+            <div className="w-full max-w-5xl mx-auto">{children}</div>
+          </main>
+          <Footer />
+        </body>
+      </ErrorBoundary>
     </html>
   );
 }

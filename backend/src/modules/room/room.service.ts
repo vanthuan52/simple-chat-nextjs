@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma/prisma.service';
 
 @Injectable()
 export class RoomService {
+  private logger = new Logger(RoomService.name);
   constructor(private prisma: PrismaService) {}
 
   async ensureDirectRoom(userOne: string, userTwo: string) {
@@ -21,6 +22,35 @@ export class RoomService {
     return this.prisma.room.create({
       data: { users: { connect: [{ id: userOne }, { id: userTwo }] } },
     });
+  }
+
+  async getOrCreateRoom(userOne: string, userTwo: string) {
+    this.logger.log(`userId: ${userOne} - ${userTwo}`);
+
+    const existingRoom = await this.prisma.room.findFirst({
+      where: {
+        AND: [
+          { users: { some: { id: userOne } } },
+          { users: { some: { id: userTwo } } },
+        ],
+      },
+      include: { users: true },
+    });
+
+    if (existingRoom) {
+      return existingRoom;
+    }
+
+    const newRoom = await this.prisma.room.create({
+      data: {
+        users: {
+          connect: [{ id: userOne }, { id: userTwo }],
+        },
+      },
+      include: { users: true },
+    });
+
+    return newRoom;
   }
 
   getRoom(roomId: string) {

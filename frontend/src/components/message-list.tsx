@@ -42,7 +42,7 @@ export default function MessageList() {
       style={{
         height: '100%',
         maxHeight: '60vh',
-        minHeight: '200px',
+        minHeight: '500px',
       }}
     >
       <ul className="flex flex-col gap-3 pb-2">
